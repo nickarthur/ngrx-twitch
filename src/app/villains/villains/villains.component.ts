@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { finalize } from 'rxjs/operators';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+
+import { Observable } from 'rxjs/Observable';
 
 import { Villain } from '../../core';
 import { VillainService } from '../villain.service';
@@ -7,16 +8,24 @@ import { VillainService } from '../villain.service';
 @Component({
   selector: 'aw-villains',
   templateUrl: './villains.component.html',
-  styleUrls: ['./villains.component.scss']
+  styleUrls: ['./villains.component.scss'],
+
+  // this could be provided anywhere this component can get to it
+  providers: [VillainService],
+
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VillainsComponent implements OnInit {
   addingVillain = false;
   selectedVillain: Villain;
 
-  villains: Villain[];
-  loading: boolean;
+  villains$: Observable<Villain[]>;
+  loading$: Observable<boolean>;
 
-  constructor(private villainService: VillainService) {}
+  constructor(public villainsService: VillainService) {
+    this.villains$ = this.villainsService.entities$;
+    this.loading$ = this.villainsService.loading$;
+  }
 
   ngOnInit() {
     this.getVillains();
@@ -28,12 +37,8 @@ export class VillainsComponent implements OnInit {
   }
 
   deleteVillain(villain: Villain) {
-    this.loading = true;
     this.unselect();
-    this.villainService
-      .deleteVillain(villain)
-      .pipe(finalize(() => (this.loading = false)))
-      .subscribe(() => (this.villains = this.villains.filter(h => h.id !== villain.id)));
+    this.villainsService.delete(villain.id);
   }
 
   enableAddMode() {
@@ -42,11 +47,7 @@ export class VillainsComponent implements OnInit {
   }
 
   getVillains() {
-    this.loading = true;
-    this.villainService
-      .getVillains()
-      .pipe(finalize(() => (this.loading = false)))
-      .subscribe(villains => (this.villains = villains));
+    this.villainsService.getAll();
     this.unselect();
   }
 
@@ -56,21 +57,11 @@ export class VillainsComponent implements OnInit {
   }
 
   update(villain: Villain) {
-    this.loading = true;
-    this.villainService
-      .updateVillain(villain)
-      .pipe(finalize(() => (this.loading = false)))
-      .subscribe(
-        () => (this.villains = this.villains.map(h => (h.id === villain.id ? villain : h)))
-      );
+    this.villainsService.update(villain);
   }
 
   add(villain: Villain) {
-    this.loading = true;
-    this.villainService
-      .addVillain(villain)
-      .pipe(finalize(() => (this.loading = false)))
-      .subscribe(addedvillain => (this.villains = this.villains.concat(addedvillain)));
+    this.villainsService.add(villain);
   }
 
   unselect() {

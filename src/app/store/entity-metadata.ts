@@ -1,7 +1,8 @@
 import { EntityMetadataMap } from 'ngrx-data';
 
 export const entityMetadata: EntityMetadataMap = {
-  Hero: {  }
+  Hero: {  },
+  Villain: {  }
 };
 
 export const pluralNames = {

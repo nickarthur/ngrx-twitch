@@ -1,11 +1,13 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
 
 import { Villain } from '../../core';
 
 @Component({
   selector: 'aw-villain-list',
   templateUrl: './villain-list.component.html',
-  styleUrls: ['./villain-list.component.scss']
+  styleUrls: ['./villain-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
+
 })
 export class VillainListComponent {
   @Input() villains: Villain[];

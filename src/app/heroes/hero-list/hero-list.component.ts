@@ -1,11 +1,12 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
 
 import { Hero } from '../../core';
 
 @Component({
   selector: 'aw-hero-list',
   templateUrl: './hero-list.component.html',
-  styleUrls: ['./hero-list.component.scss']
+  styleUrls: ['./hero-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeroListComponent {
   @Input() heroes: Hero[];

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { finalize } from 'rxjs/operators';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+
+import { Observable } from 'rxjs/Observable';
 
 import { Hero } from '../../core';
 import { HeroService } from '../hero.service';
@@ -7,16 +8,24 @@ import { HeroService } from '../hero.service';
 @Component({
   selector: 'aw-heroes',
   templateUrl: './heroes.component.html',
-  styleUrls: ['./heroes.component.scss']
+  styleUrls: ['./heroes.component.scss'],
+
+  // this could be provided anywhere this component can get to it
+  providers: [ HeroService ],
+
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeroesComponent implements OnInit {
   addingHero = false;
   selectedHero: Hero;
 
-  heroes: Hero[];
-  loading: boolean;
+  heroes$: Observable<Hero[]>;
+  loading$: Observable<boolean>;
 
-  constructor(private heroService: HeroService) {}
+  constructor(public heroesService: HeroService) {
+    this.heroes$ = this.heroesService.entities$;
+    this.loading$ = this.heroesService.loading$;
+  }
 
   ngOnInit() {
     this.getHeroes();
@@ -28,12 +37,8 @@ export class HeroesComponent implements OnInit {
   }
 
   deleteHero(hero: Hero) {
-    this.loading = true;
     this.unselect();
-    this.heroService
-      .deleteHero(hero)
-      .pipe(finalize(() => (this.loading = false)))
-      .subscribe(() => (this.heroes = this.heroes.filter(h => h.id !== hero.id)));
+    this.heroesService.delete(hero.id);
   }
 
   enableAddMode() {
@@ -42,11 +47,7 @@ export class HeroesComponent implements OnInit {
   }
 
   getHeroes() {
-    this.loading = true;
-    this.heroService
-      .getHeroes()
-      .pipe(finalize(() => (this.loading = false)))
-      .subscribe(heroes => (this.heroes = heroes));
+    this.heroesService.getAll();
     this.unselect();
   }
 
@@ -56,19 +57,11 @@ export class HeroesComponent implements OnInit {
   }
 
   update(hero: Hero) {
-    this.loading = true;
-    this.heroService
-      .updateHero(hero)
-      .pipe(finalize(() => (this.loading = false)))
-      .subscribe(() => (this.heroes = this.heroes.map(h => (h.id === hero.id ? hero : h))));
+    this.heroesService.update(hero);
   }
 
   add(hero: Hero) {
-    this.loading = true;
-    this.heroService
-      .addHero(hero)
-      .pipe(finalize(() => (this.loading = false)))
-      .subscribe(addedHero => (this.heroes = this.heroes.concat(addedHero)));
+    this.heroesService.add(hero);
   }
 
   unselect() {

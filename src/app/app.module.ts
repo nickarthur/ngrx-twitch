@@ -6,10 +6,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core';
+import { AppStoreModule } from './store/app-store.module';
 
 @NgModule({
-  imports: [BrowserModule, BrowserAnimationsModule, CoreModule, HttpClientModule, AppRoutingModule],
+  imports: [
+    BrowserModule, BrowserAnimationsModule, CoreModule,
+    HttpClientModule, AppRoutingModule,
+    // ngrx configured for the app
+    AppStoreModule
+  ],
   declarations: [AppComponent],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

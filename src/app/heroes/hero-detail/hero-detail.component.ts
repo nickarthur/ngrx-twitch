@@ -6,7 +6,8 @@ import {
   OnChanges,
   Output,
   ViewChild,
-  SimpleChanges
+  SimpleChanges,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 import { Hero } from '../../core';
@@ -14,7 +15,8 @@ import { Hero } from '../../core';
 @Component({
   selector: 'aw-hero-detail',
   templateUrl: './hero-detail.component.html',
-  styleUrls: ['./hero-detail.component.scss']
+  styleUrls: ['./hero-detail.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeroDetailComponent implements OnChanges {
   @Input() hero: Hero;

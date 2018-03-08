@@ -26,6 +26,7 @@
     "@ngrx/effects": "^5.2.0",
     "@ngrx/entity": "^5.2.0",
     "@ngrx/store": "^5.2.0",
+    "@ngrx/store-devtools": "^5.2.0",
     "angular-in-memory-web-api": "^0.5.3",
     "body-parser": "^1.18.2",
     "core-js": "^2.5.3",

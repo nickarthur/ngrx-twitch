@@ -2,8 +2,8 @@
 
 ## Quick Start
 
-* `git clone git@github.com:johnpapa/ngrx-data-lab.git`
-* `cd ngrx-data-lab`
+* `git clone git@github.com:johnpapa/ngrx-twitch.git`
+* `cd ngrx-twitch`
 * `npm install`
 * `ng serve -o`
 

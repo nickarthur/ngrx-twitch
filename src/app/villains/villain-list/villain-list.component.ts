@@ -7,7 +7,6 @@ import { Villain } from '../../core';
   templateUrl: './villain-list.component.html',
   styleUrls: ['./villain-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
-
 })
 export class VillainListComponent {
   @Input() villains: Villain[];

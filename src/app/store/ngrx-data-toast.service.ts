@@ -18,9 +18,7 @@ export class NgrxDataToastService implements OnDestroy {
     actions$
       .pipe(
         filter(
-          (ea: EntityAction) =>
-            ea.op &&
-            (ea.op.includes(OP_SUCCESS) || ea.op.includes(OP_ERROR))
+          (ea: EntityAction) => ea.op && (ea.op.includes(OP_SUCCESS) || ea.op.includes(OP_ERROR))
         ),
         takeUntil(this.onDestroy)
       )

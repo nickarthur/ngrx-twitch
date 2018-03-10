@@ -11,7 +11,7 @@ import { HeroService } from '../hero.service';
   styleUrls: ['./heroes.component.scss'],
 
   // this could be provided anywhere this component can get to it
-  providers: [ HeroService ],
+  providers: [HeroService],
 
   changeDetection: ChangeDetectionStrategy.OnPush
 })

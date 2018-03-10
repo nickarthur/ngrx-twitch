@@ -28,9 +28,9 @@ import { environment } from '../../environments/environment';
     // Don't load the developer tools in production
     environment.production ? [] : StoreDevtoolsModule.instrument()
   ],
-  providers: [ NgrxDataToastService ]
+  providers: [NgrxDataToastService]
 })
 export class AppStoreModule {
   // Inject NgrxDataToastService to start it listening
-  constructor( toastService: NgrxDataToastService) { }
+  constructor(toastService: NgrxDataToastService) {}
 }

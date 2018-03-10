@@ -124,7 +124,7 @@ function getDbData() {
       id: 26,
       name: 'Tony Montana',
       saying: 'Say hello to my little friend.'
-    },
+    }
   ];
 
   return { heroes, villains } as Db;

@@ -26,7 +26,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatProgressSpinnerModule,
     MatSlideToggleModule,
     MatSnackBarModule,
-    MatTooltipModule,
+    MatTooltipModule
   ],
   exports: [
     MatButtonModule,
@@ -39,7 +39,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatSlideToggleModule,
     MatSnackBarModule,
     MatToolbarModule,
-    MatTooltipModule,
+    MatTooltipModule
   ],
   declarations: []
 })

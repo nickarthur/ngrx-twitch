@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent {
-  labTitle = 'ngrx-twitch';
-  labState = 'template';
+  labTitle = 'ngrx-data-lab';
+  labState = 'traditional services, without NgRx';
 }

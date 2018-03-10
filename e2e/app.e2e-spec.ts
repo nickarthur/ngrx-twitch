@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('ngrx-twitch App', () => {
+describe('ngrx-data-lab App', () => {
   let page: AppPage;
 
   beforeEach(() => {
